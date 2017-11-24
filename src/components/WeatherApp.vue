@@ -1,5 +1,5 @@
 <template>
-  <div class="weather-wrapper">
+  <div class="weather-wrapper" v-if="weather">
     <h1>Weather App</h1>
       <h2>{{weather.name}}, {{weather.sys.country}}</h2>
       <h2 id="temperature" >{{weather.main.temp.toFixed(1)}} °C</h2> 
