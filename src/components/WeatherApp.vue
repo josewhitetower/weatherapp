@@ -2,9 +2,14 @@
   <div class="weather-wrapper" v-if="weather">
     <h1>Weather App</h1>
       <h2>{{weather.name}}, {{weather.sys.country}}</h2>
-      <h2 id="temperature" >{{weather.main.temp.toFixed(1)}} °C</h2> 
+      <h2 id="temperature" >
+        <span>{{weather.main.temp.toFixed(1)}} °C</span> 
+         <img :src="weather.weather[0].icon" :alt="weather.weather[0].description">
+        
+        
+        </h2> 
 
-      <img :src="weather.weather[0].icon" :alt="weather.weather[0].description">
+     
 
       <button @click="temp=!temp">°F</button>
     
@@ -38,7 +43,7 @@ export default {
   },
   watch: {
     temp() {
-      const temperature = document.querySelector("#temperature");
+      const temperature = document.querySelector("#temperature span");
       const button = document.querySelector("button");
       if (this.temp === false) {
         const fahrenheit = this.toFahrenheit(this.weather.main.temp);
