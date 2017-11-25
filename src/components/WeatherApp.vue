@@ -10,6 +10,7 @@
     
 
   </div>
+  <div v-else class="loader" ></div>
 </template>
 
 <script>
@@ -39,7 +40,6 @@ export default {
     temp() {
       const temperature = document.querySelector("#temperature");
       if (this.temp === false) {
-        console.log("Fahrenheit");
         const fahrenheit = this.toFahrenheit(this.weather.main.temp);
         temperature.textContent = `${fahrenheit.toFixed(1)} °F`;
       } else {
@@ -57,5 +57,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.loader {
+  margin: 0 auto;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+}
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 </style>
