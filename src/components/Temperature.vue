@@ -1,8 +1,8 @@
 <template>
    <div>
-      <p id="temperature">Temperature: <span>{{temperature}} °C</span></p>
-      <p id="temperatureMax">Max: <span>{{temperatureMax}} °C</span></p>
-      <p id="temperatureMin">Min: <span>{{temperatureMin}} °C</span></p>
+      <p id="temperature">Temperature: <span>{{temperature.toFixed(1)}} °C</span></p>
+      <p id="temperatureMax">Max: <span>{{temperatureMax.toFixed(1)}} °C</span></p>
+      <p id="temperatureMin">Min: <span>{{temperatureMin.toFixed(1)}} °C</span></p>
       <button  @click="celsius=!celsius">°F</button>
    </div>
 </template>
@@ -39,11 +39,10 @@ export default {
         max.textContent = `${fahrenheitMax.toFixed(1)} °F`;
         min.textContent = `${fahrenheitMin.toFixed(1)} °F`;
         button.textContent = "°C";
-        this.celsius = !this.celsius;
       } else {
-        temperature.textContent = `${this.temperature} °C`;
-        max.textContent = `${this.temperatureMax} °C`;
-        min.textContent = `${this.temperatureMin} °C`;
+        temperature.textContent = `${this.temperature.toFixed(1)} °C`;
+        max.textContent = `${this.temperatureMax.toFixed(1)} °C`;
+        min.textContent = `${this.temperatureMin.toFixed(1)} °C`;
         button.textContent = "°F";
       }
     }
