@@ -3,18 +3,14 @@
     <h1>Weather App</h1>
       <h2>{{weather.name}}, {{weather.sys.country}}</h2>
       <h2 id="temperature" >
-        <span>{{weather.main.temp.toFixed(1)}} °C</span> 
+   
          <img :src="weather.weather[0].icon" :alt="weather.weather[0].description">               
       </h2> 
-     <div>
-        <p id="max">Max: <span> {{weather.main.temp_max.toFixed(1)}} °C</span></p>
-        <p id="min">Min: <span> {{weather.main.temp_min.toFixed(1)}} °C</span></p>
-     </div>
-      <button @click="temp=!temp">°F</button>    
+    
       <Temperature 
         :temperature="weather.main.temp" 
-        :temperature-max="weather.main.temp_max" 
-        :temperature-min="weather.main.temp_min"
+        :temperatureMax="weather.main.temp_max" 
+        :temperatureMin="weather.main.temp_min"
       />
   </div>
   <div v-else class="loader" ></div>
@@ -29,8 +25,7 @@ export default {
   },
   data() {
     return {
-      weather: undefined,
-      temp: true
+      weather: undefined
     };
   },
   mounted() {
@@ -46,29 +41,6 @@ export default {
           });
       });
     }
-  },
-  watch: {
-    temp() {
-      const temperature = document.querySelector("#temperature span");
-      const button = document.querySelector("button");
-      const max = document.querySelector("#max span");
-      const min = document.querySelector("#min span");
-      if (this.temp === false) {
-        const fahrenheit = this.toFahrenheit(this.weather.main.temp);
-        const fahrenheitMax = this.toFahrenheit(this.weather.main.temp_max);
-        const fahrenheitMin = this.toFahrenheit(this.weather.main.temp_min);
-        temperature.textContent = `${fahrenheit.toFixed(1)} °F`;
-        max.textContent = `${fahrenheitMax.toFixed(1)} °F`;
-        min.textContent = `${fahrenheitMin.toFixed(1)} °F`;
-
-        button.textContent = "°C";
-      } else {
-        temperature.textContent = `${this.weather.main.temp.toFixed(1)} °C`;
-        max.textContent = `${this.weather.main.temp_max.toFixed(1)} °C`;
-        min.textContent = `${this.weather.main.temp_min.toFixed(1)} °C`;
-        button.textContent = "°F";
-      }
-    }
   }
 };
 </script>
@@ -82,7 +54,7 @@ export default {
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  animation: spin 2s linear infinite;
+  animation: spin 0.5s linear infinite;
 }
 
 @keyframes spin {
