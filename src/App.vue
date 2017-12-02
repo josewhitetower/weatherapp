@@ -66,7 +66,7 @@ export default {
 .loader {
   margin: 20% auto;
   border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #2d2f33; /* Blue */
+  border-top: 16px solid #2d2f33;  /* Blue */
   border-radius: 50%;
   width: 40px;
   height: 40px;
