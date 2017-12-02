@@ -1,27 +1,36 @@
-<template>
-   <div id="app" v-if="weather">
-    <h1>Weather App</h1>
-      <h2>{{weather.name}}, {{weather.sys.country}}</h2>   
-         <img :src="weather.weather[0].icon" :alt="weather.weather[0].description">   
+<template>  
+  <div v-if="loading" class="loader" ></div>
+   <el-card id="app" v-else>
+      <div slot="header" class="clearfix">
+        <h1 class="u-center">Weather App</h1>
+      </div>
+         <h2 class="u-center">{{weather.name}}, {{weather.sys.country}}</h2>   
+        
+      <WeatherIcon        
+        :icon="weather.weather[0].icon"
+      />
       <Temperature 
         :temperature="weather.main.temp" 
         :temperatureMax="weather.main.temp_max" 
         :temperatureMin="weather.main.temp_min"
-      />
-  </div>
-  <div v-else class="loader" ></div>
+      />     
+  </el-card>
+  
 </template>
 
 <script>
 import Temperature from "./components/Temperature";
+import WeatherIcon from "./components/WeatherIcon";
 export default {
   name: "WeatherApp",
   components: {
-    Temperature
+    Temperature,
+    WeatherIcon
   },
   data() {
     return {
-      weather: undefined
+      weather: [],
+      loading: true
     };
   },
   mounted() {
@@ -34,6 +43,7 @@ export default {
           .then(data => data.json())
           .then(data => {
             this.weather = data;
+            this.loading = false;
           });
       });
     }
@@ -41,19 +51,22 @@ export default {
 };
 </script>
 
-<style>
+
+
+
+<<style >
+
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
 }
 .loader {
   margin: 20% auto;
   border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid green; /* Blue */
+  border-top: 16px solid #2d2f33; /* Blue */
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -67,5 +80,14 @@ export default {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.el-card {
+  width: 400px;
+  max-width: 100%;
+  margin: auto;
+}
+.u-center {
+  text-align: center;
 }
 </style>

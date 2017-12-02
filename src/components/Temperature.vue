@@ -1,9 +1,18 @@
 <template>
-   <div>
-      <p id="temperature">Temperature: <span>{{temperature.toFixed(1)}} °C</span></p>
-      <p id="temperatureMax">Max: <span>{{temperatureMax.toFixed(1)}} °C</span></p>
-      <p id="temperatureMin">Min: <span>{{temperatureMin.toFixed(1)}} °C</span></p>
-      <button  @click="celsius=!celsius">°F</button>
+   <div style="position:relative">
+      <p id="temperature" class="u-center"> <span>{{temperature.toFixed()}} °C</span></p>
+      <div class="temperatures">
+
+      <p id="temperatureMax">Max: <span>{{temperatureMax.toFixed()}} °C</span></p>
+      <p id="temperatureMin">Min: <span>{{temperatureMin.toFixed()}} °C</span></p>
+      <el-switch  
+          v-model="fahrenheit"         
+           active-text="°F"
+          class="u-center"   
+           >
+          
+      </el-switch>
+      </div>
    </div>
 </template>
 
@@ -17,7 +26,7 @@ export default {
   },
   data() {
     return {
-      celsius: true
+      fahrenheit: false
     };
   },
   methods: {
@@ -26,30 +35,41 @@ export default {
     }
   },
   watch: {
-    celsius() {
+    fahrenheit() {
       const temperature = document.querySelector("#temperature span");
-      const button = document.querySelector("button");
+
       const max = document.querySelector("#temperatureMax span");
       const min = document.querySelector("#temperatureMin span");
-      if (!this.celsius) {
+      if (this.fahrenheit) {
         const fahrenheit = this.toFahrenheit(this.temperature);
         const fahrenheitMax = this.toFahrenheit(this.temperatureMax);
         const fahrenheitMin = this.toFahrenheit(this.temperatureMin);
-        temperature.textContent = `${fahrenheit.toFixed(1)} °F`;
-        max.textContent = `${fahrenheitMax.toFixed(1)} °F`;
-        min.textContent = `${fahrenheitMin.toFixed(1)} °F`;
-        button.textContent = "°C";
+        temperature.textContent = `${fahrenheit.toFixed()} °F`;
+        max.textContent = `${fahrenheitMax.toFixed()} °F`;
+        min.textContent = `${fahrenheitMin.toFixed()} °F`;
       } else {
-        temperature.textContent = `${this.temperature.toFixed(1)} °C`;
-        max.textContent = `${this.temperatureMax.toFixed(1)} °C`;
-        min.textContent = `${this.temperatureMin.toFixed(1)} °C`;
-        button.textContent = "°F";
+        temperature.textContent = `${this.temperature.toFixed()} °C`;
+        max.textContent = `${this.temperatureMax.toFixed()} °C`;
+        min.textContent = `${this.temperatureMin.toFixed()} °C`;
       }
     }
   }
 };
 </script>
 
-<style>
-
+<style >
+p#temperature {
+  font-size: 38px;
+}
+p#temperatureMin,
+p#temperatureMax {
+  font-size: 14px;
+}
+.temperatures {
+  text-align: right;
+  text-align: right;
+  position: absolute;
+  top: -20px;
+  right: 5px;
+}
 </style>
