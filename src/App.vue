@@ -120,4 +120,15 @@ export default {
     bottom: 155px;
     right: 98px;
 }
+
+@media screen and (max-width: 475px){
+  .more-data{
+    bottom: 120px;
+    left: 10px;
+  }
+    .coords{
+    right:24px;
+  }
+}
+
 </style>
