@@ -1,14 +1,28 @@
 <template>  
   <div v-if="loading" class="loader" ></div>
-   <el-card id="app" v-else>
+   <el-card id="app" v-else style="position:relative">
       <div slot="header" class="clearfix">
         <h1 class="u-center">Weather App</h1>
       </div>
-         <h2 class="u-center">{{weather.name}}, {{weather.sys.country}}</h2>   
+         <h2 class="u-center">{{weather.name}}, {{weather.sys.country}}
+          
+           </h2>   
+      <div class="coords">
+          <p>Lat: {{weather.coord.lat}}</p>
+         <p>Lon: {{weather.coord.lon}} </p>
+        </div>  
+      <div class="more-data">
+         <p>Wind: {{weather.wind.speed}} km/h     <i :class="iconClass"  class="wi wi-wind " title="wind direction"  style="font-size:22px"></i> </p>
+         <p>Humidity: {{weather.main.humidity}} %</p>        
+         <p>Pressure: {{weather.main.pressure}} hpa</p>
+      
         
+        
+      </div>
       <WeatherIcon        
         :icon="weather.weather[0].icon"
       />
+
       <Temperature 
         :temperature="weather.main.temp" 
         :temperatureMax="weather.main.temp_max" 
@@ -37,8 +51,8 @@ export default {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(pos => {
         const lat = pos.coords.latitude;
-        const lng = pos.coords.longitude;
-        const endpoint = `https://api.openweathermap.org/data/2.5/weather?appid=7a741b8c0c30634f435a5545b89331e8&units=metric&lat=${lat}&lon=${lng}`;
+        const lon = pos.coords.longitude;
+        const endpoint = `https://api.openweathermap.org/data/2.5/weather?appid=7a741b8c0c30634f435a5545b89331e8&units=metric&lat=${lat}&lon=${lon}`;
         fetch(endpoint)
           .then(data => data.json())
           .then(data => {
@@ -46,6 +60,11 @@ export default {
             this.loading = false;
           });
       });
+    }
+  },
+  computed: {
+    iconClass() {
+      return `towards-${this.weather.wind.deg}-deg`;
     }
   }
 };
@@ -83,11 +102,22 @@ export default {
 }
 
 .el-card {
-  width: 400px;
+  width: 500px;
   max-width: 100%;
   margin: auto;
 }
 .u-center {
   text-align: center;
+}
+.more-data{
+  font-size:14px;
+  position:absolute;
+      bottom: 12px;
+}
+.coords{
+     font-size: 14px;
+    position: absolute;
+    bottom: 155px;
+    right: 98px;
 }
 </style>

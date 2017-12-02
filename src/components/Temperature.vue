@@ -1,6 +1,6 @@
 <template>
    <div style="position:relative">
-      <p id="temperature" class="u-center"> <span>{{temperature.toFixed()}} °C</span></p>
+      <p id="temperature" class="u-center"><i class="wi wi-thermometer"></i> <span>{{temperature.toFixed()}} °C</span></p>
       <div class="temperatures">
 
       <p id="temperatureMax">Max: <span>{{temperatureMax.toFixed()}} °C</span></p>
@@ -8,6 +8,8 @@
       <el-switch  
           v-model="fahrenheit"         
            active-text="°F"
+           inactive-text="°C"
+           inactive-color= #2d2f33
           class="u-center"   
            >
           
