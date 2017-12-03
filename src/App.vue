@@ -12,7 +12,7 @@
          <p>Lon: {{weather.coord.lon}} </p>
         </div>  
       <div class="more-data">
-         <p>Wind: {{weather.wind.speed}} km/h     <i :class="iconClass"  class="wi wi-wind " title="wind direction"  style="font-size:22px"></i> </p>
+         <p>Wind: {{weather.wind.speed}} km/h     <i :class="`towards-${this.weather.wind.deg}-deg`"  class="wi wi-wind" title="wind direction"  style="font-size:22px"></i> </p>
          <p>Humidity: {{weather.main.humidity}} %</p>        
          <p>Pressure: {{weather.main.pressure}} hpa</p>
       
@@ -60,11 +60,6 @@ export default {
             this.loading = false;
           });
       });
-    }
-  },
-  computed: {
-    iconClass() {
-      return `towards-${this.weather.wind.deg}-deg`;
     }
   }
 };
