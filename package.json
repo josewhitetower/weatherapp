@@ -12,7 +12,9 @@
   "dependencies": {
     "element-theme": "^2.0.1",
     "element-ui": "^2.0.7",
-    "vue": "^2.5.2"
+    "promise-polyfill": "^6.1.0",
+    "vue": "^2.5.2",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
